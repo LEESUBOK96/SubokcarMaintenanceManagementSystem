@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MaintenanceManager {
-	Maintenance maintenance;
+	ArrayList<Maintenance> maintenances = new ArrayList<Maintenance>();
 	Scanner input;
 	
 	MaintenanceManager(Scanner input){
@@ -9,7 +10,7 @@ public class MaintenanceManager {
 	}
 	
 	public void addMaintenance() {
-	    maintenance = new Maintenance();
+	    Maintenance maintenance = new Maintenance();
 		System.out.print("Maintenance Name:");
 		maintenance.maintenanceName = input.next();	
 		System.out.print("Maintenance Year:");
@@ -18,22 +19,31 @@ public class MaintenanceManager {
 		maintenance.distancedriven  = input.nextInt();
 		System.out.print("Workshop:");
 		maintenance.workshop  = input.next();
+		maintenances.add(maintenance);
 		
 		}
 		public void deleteMaintenance() {
 			
 			System.out.print("Maintenance Name:");
 			String maintenanceName = input.next();	
-		    		   
-		    if(maintenance.maintenanceName.equals(maintenanceName)) {
-		        maintenance = null;
-		    	System.out.println("the maintenance is deleted");
-		    
-		    }
-		    else {
-		    	System.out.println("the maintenance has not been registered");
-		    	return;
-		    }
+			int index = -1;
+			for (int i = 0; i<maintenances.size(); i++) {
+				 if(maintenances.get(i).maintenanceName.equals(maintenanceName)) {
+				       index = i;
+				    	break;
+				    
+				    }
+			}
+			
+			if(index >= 0) {
+				maintenances.remove(index);
+				Maintenance.numMaintenancesRegistered--;
+				System.out.println("the maintenance " + maintenanceName + "is deleted");				
+			}
+			else {
+				System.out.println("the maintenance has not been registered");
+				return;
+			}
 		}
 		
 		
@@ -41,6 +51,8 @@ public class MaintenanceManager {
 			
 			System.out.print("Maintenance Name:");
 			String maintenanceName = input.next();
+			for (int i = 0; i<maintenances.size(); i++) {
+			Maintenance maintenance = maintenances.get(i);	
 			if(maintenance.maintenanceName.equals(maintenanceName)) {
 				int num = -1;
 				
@@ -78,21 +90,20 @@ public class MaintenanceManager {
 				}
 				else {
 					continue;
-				}
-				}
-				
-			}
-			
-			
+			 }//if
+			}//while
+				break;
+		  }//if	
+		 }//for						
 		}
 		
-		public void viewMaintenance() {
+		public void viewMaintenances() {
 			
-			System.out.print("Maintenance Name:");
-			String maintenanceName = input.next();
-			if(maintenance.maintenanceName.equals(maintenanceName)) {
-				maintenance.printInfo();
-		
-		}
+//			System.out.print("Maintenance Name:");
+//			String maintenanceName = input.next();
+			System.out.println("# of registered maintenances :" + Maintenance.numMaintenancesRegistered);
+			for (int i = 0; i<maintenances.size(); i++) {
+				maintenances.get(i).printInfo();
+			}			
 		}
 }
