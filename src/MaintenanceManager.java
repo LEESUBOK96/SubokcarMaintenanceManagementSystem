@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Maintenance.BreakpartMaintenance;
+import Maintenance.Maintenance;
+
 public class MaintenanceManager {
 	ArrayList<Maintenance> maintenances = new ArrayList<Maintenance>();
 	Scanner input;
@@ -10,25 +13,51 @@ public class MaintenanceManager {
 	}
 	
 	public void addMaintenance() {
-	    Maintenance maintenance = new Maintenance();
-		System.out.print("Maintenance Name:");
-		maintenance.maintenanceName = input.next();	
-		System.out.print("Maintenance Year:");
-		maintenance.maintenanceYear = input.nextInt();
-		System.out.print("Distance driven:");
-		maintenance.distancedriven  = input.nextInt();
-		System.out.print("Workshop:");
-		maintenance.workshop  = input.next();
-		maintenances.add(maintenance);
-		
+		int kind = 0;
+		Maintenance maintenance;
+		while(kind !=1 && kind !=2 && kind !=3 && kind !=4) {
+		System.out.print("Select num for Maintenance Kind between 1-4 :");
+		System.out.print("1 for Enginepart");
+		System.out.print("2 for Tirepart");
+		System.out.print("3 for Breakpart");
+		System.out.print("4 for Othermaintenancepart");
+		kind = input.nextInt();
+		if (kind ==1) {
+			maintenance = new Maintenance();
+			maintenance.getUserInput(input);
+			maintenances.add(maintenance);
+			break;
 		}
+		else if (kind == 2) {
+			maintenance = new Maintenance();
+			maintenance.getUserInput(input);
+			maintenances.add(maintenance);
+			break;
+		}
+        else if (kind == 3) {
+        	maintenance = new BreakpartMaintenance();
+        	maintenance.getUserInput(input);
+        	maintenances.add(maintenance);
+			break;
+		}
+        else if (kind == 4) {
+        	maintenance = new Maintenance();
+        	maintenance.getUserInput(input);
+        	maintenances.add(maintenance);
+			break;
+		}
+        else {
+        	System.out.print("Select num for Maintenance Kind between 1-4 :");
+            }
+		}	
+    }
 		public void deleteMaintenance() {
 			
 			System.out.print("Maintenance Name:");
 			String maintenanceName = input.next();	
 			int index = -1;
 			for (int i = 0; i<maintenances.size(); i++) {
-				 if(maintenances.get(i).maintenanceName.equals(maintenanceName)) {
+				 if(maintenances.get(i).getMaintenanceName().equals(maintenanceName)) {
 				       index = i;
 				    	break;
 				    
@@ -37,7 +66,6 @@ public class MaintenanceManager {
 			
 			if(index >= 0) {
 				maintenances.remove(index);
-				Maintenance.numMaintenancesRegistered--;
 				System.out.println("the maintenance " + maintenanceName + "is deleted");				
 			}
 			else {
@@ -53,7 +81,7 @@ public class MaintenanceManager {
 			String maintenanceName = input.next();
 			for (int i = 0; i<maintenances.size(); i++) {
 			Maintenance maintenance = maintenances.get(i);	
-			if(maintenance.maintenanceName.equals(maintenanceName)) {
+			if(maintenance.getMaintenanceName().equals(maintenanceName)) {
 				int num = -1;
 				
 				while(num !=5) {
@@ -68,24 +96,26 @@ public class MaintenanceManager {
 				num = input.nextInt();
 				if (num == 1) {
 					System.out.print("Maintenance Name:");
-					maintenance.maintenanceName = input.next();	
+					String maintenanceName1 = input.next();
+					maintenance.setMaintenanceName(maintenanceName1);
 					
 				}
 				else if (num == 2) {
 					System.out.print("Maintenance Year:");
-					maintenance.maintenanceYear = input.nextInt();
+					int maintenanceYear = input.nextInt();
+					maintenance.setMaintenanceYear(maintenanceYear);
 					
 				}
 				else if (num == 3) {
 					System.out.print("Distance driven:");
-					maintenance.distancedriven  = input.nextInt();
-					
+					int distancedriven  = input.nextInt();
+					maintenance.setDistancedriven(distancedriven);
 					
 				}
 				else if (num == 4) {
 					System.out.print("Workshop:");
-					maintenance.workshop  = input.next();
-					
+					String workshop  = input.next();
+					maintenance.setWorkshop(workshop);
 					
 				}
 				else {
@@ -101,7 +131,7 @@ public class MaintenanceManager {
 			
 //			System.out.print("Maintenance Name:");
 //			String maintenanceName = input.next();
-			System.out.println("# of registered maintenances :" + Maintenance.numMaintenancesRegistered);
+			System.out.println("# of registered maintenances :" + maintenances.size());
 			for (int i = 0; i<maintenances.size(); i++) {
 				maintenances.get(i).printInfo();
 			}			
