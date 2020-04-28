@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 import Maintenance.BreakpartMaintenance;
 import Maintenance.Maintenance;
+import Maintenance.MaintenanceKind;
+import Maintenance.OthermaintenancepartMaintenance;
 
 public class MaintenanceManager {
 	ArrayList<Maintenance> maintenances = new ArrayList<Maintenance>();
@@ -16,32 +18,32 @@ public class MaintenanceManager {
 		int kind = 0;
 		Maintenance maintenance;
 		while(kind !=1 && kind !=2 && kind !=3 && kind !=4) {
+		System.out.println("1 for Enginepart");
+		System.out.println("2 for Tirepart");
+		System.out.println("3 for Breakpart");
+		System.out.println("4 for Othermaintenancepart");
 		System.out.print("Select num for Maintenance Kind between 1-4 :");
-		System.out.print("1 for Enginepart");
-		System.out.print("2 for Tirepart");
-		System.out.print("3 for Breakpart");
-		System.out.print("4 for Othermaintenancepart");
 		kind = input.nextInt();
 		if (kind ==1) {
-			maintenance = new Maintenance();
+			maintenance = new Maintenance(MaintenanceKind.Enginepart);
 			maintenance.getUserInput(input);
 			maintenances.add(maintenance);
 			break;
 		}
 		else if (kind == 2) {
-			maintenance = new Maintenance();
+			maintenance = new Maintenance(MaintenanceKind.Tirepart);
 			maintenance.getUserInput(input);
 			maintenances.add(maintenance);
 			break;
 		}
         else if (kind == 3) {
-        	maintenance = new BreakpartMaintenance();
+        	maintenance = new BreakpartMaintenance(MaintenanceKind.Breakpart);
         	maintenance.getUserInput(input);
         	maintenances.add(maintenance);
 			break;
 		}
         else if (kind == 4) {
-        	maintenance = new Maintenance();
+        	maintenance = new OthermaintenancepartMaintenance(MaintenanceKind.Othermaintenancepart);
         	maintenance.getUserInput(input);
         	maintenances.add(maintenance);
 			break;

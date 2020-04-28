@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 public class BreakpartMaintenance extends Maintenance {
 	
+	public BreakpartMaintenance(MaintenanceKind kind) {
+		super(kind);
+		
+	}
+	
+
 	public void getUserInput(Scanner input) {
 		System.out.print("Maintenance Name:");
 		String maintenanceName = input.next();

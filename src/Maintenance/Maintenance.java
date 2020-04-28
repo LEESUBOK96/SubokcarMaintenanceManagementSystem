@@ -14,6 +14,11 @@ public class Maintenance {
 		
 		}
 	
+	public Maintenance(MaintenanceKind kind) {
+		this.kind = kind;
+		
+	}
+	
 	public Maintenance(String maintenanceName, int distancedriven) {
 		this.maintenanceName = maintenanceName;
 		this.distancedriven = distancedriven;
@@ -22,6 +27,15 @@ public class Maintenance {
 		
 	public Maintenance(String maintenanceName, int maintenanceYear, int distancedriven,String workshop){
 	
+		this.maintenanceName  = maintenanceName;
+		this.maintenanceYear = maintenanceYear;
+		this.distancedriven = distancedriven;
+		this.workshop = workshop;
+				
+	}
+	
+	public Maintenance(MaintenanceKind kind, String maintenanceName, int maintenanceYear, int distancedriven,String workshop){
+		this.kind = kind;
 		this.maintenanceName  = maintenanceName;
 		this.maintenanceYear = maintenanceYear;
 		this.distancedriven = distancedriven;
@@ -70,7 +84,24 @@ public class Maintenance {
 	}
 	
 	public void printInfo() {
-		System.out.println("MaintenanceName:" + maintenanceName + "  MaintenanceYear:" 
+		String skind = "none";
+    switch(this.kind) {
+    case Enginepart:
+    	skind = "Engine";
+    	break;
+    case Tirepart:
+    	skind = "Tire";
+    	break;
+    case Breakpart:
+    	skind = "Break";
+    	break;
+    case Othermaintenancepart:
+    	skind = "Other";
+    	break;
+    	default:
+    		
+    }
+	System.out.println("Kind: "+ skind + "MaintenanceName:" + maintenanceName + "  MaintenanceYear:" 
 	+ maintenanceYear + "  Distancedriven:" + distancedriven + "  Workshop:" + workshop);
 	}	
 	public void getUserInput(Scanner input) {
