@@ -2,7 +2,7 @@ package Maintenance;
 
 import java.util.Scanner;
 
-public class OthermaintenancepartMaintenance extends Maintenance {
+public class OthermaintenancepartMaintenance extends PreviousMaintenance {
 	
 	public OthermaintenancepartMaintenance(MaintenanceKind kind) {
 		super(kind);
@@ -13,18 +13,13 @@ public class OthermaintenancepartMaintenance extends Maintenance {
 	protected String fatherworkshop;
 
 	public void getUserInput(Scanner input) {
-		System.out.print("Maintenance Name:");
-		String maintenanceName = input.next();
-		this.setMaintenanceName(maintenanceName);
-		
-		System.out.print("Maintenance Year:");
-		int maintenanceYear = input.nextInt();
-		this.setMaintenanceYear(maintenanceYear);
-		
-		System.out.print("Distance driven:");
-		int distancedriven  = input.nextInt();
-		this.setDistancedriven(distancedriven);
-		
+		setMaintenanceName(input);
+		setMaintenanceYear(input);
+		setDistancedriven(input);
+		setWorkshopwithYN(input);
+		setPreviousWorkshopwithYN(input);	
+  }
+	public void setPreviousWorkshopwithYN(Scanner input) {
 		char answer = 'x';
 		while (answer != 'y' && answer != 'Y'&& answer != 'n' && answer != 'N') {
 		System.out.print("Do you have a previous workshop data? (Y/N)");
@@ -43,26 +38,9 @@ public class OthermaintenancepartMaintenance extends Maintenance {
 			
 		}
 	}
-		
-  }
+}
 	public void printInfo() {
-		String skind = "none";
-    switch(this.kind) {
-    case Enginepart:
-    	skind = "Engine";
-    	break;
-    case Tirepart:
-    	skind = "Tire";
-    	break;
-    case Breakpart:
-    	skind = "Break";
-    	break;
-    case Othermaintenancepart:
-    	skind = "Other";
-    	break;
-    	default:
-    		
-    }
+		String skind = getkind();
 	System.out.println("Kind: "+ skind + "MaintenanceName:" + maintenanceName + "  MaintenanceYear:" 
 	+ maintenanceYear + "  Distancedriven:" + distancedriven + "  Workshop:" + workshop + " previous Distancedriven:" + distancedriven + "  previous workshop:" + workshop);
 	}

@@ -2,7 +2,7 @@ package Maintenance;
 
 import java.util.Scanner;
 
-public class Maintenance {
+public abstract class Maintenance implements MaintenanceInput {
 	protected MaintenanceKind kind = MaintenanceKind.Othermaintenancepart;
 	protected String maintenanceName;
 	protected int maintenanceYear;
@@ -83,43 +83,47 @@ public class Maintenance {
 		this.workshop = workshop;
 	}
 	
-	public void printInfo() {
-		String skind = "none";
-    switch(this.kind) {
-    case Enginepart:
-    	skind = "Engine";
-    	break;
-    case Tirepart:
-    	skind = "Tire";
-    	break;
-    case Breakpart:
-    	skind = "Break";
-    	break;
-    case Othermaintenancepart:
-    	skind = "Other";
-    	break;
-    	default:
-    		
-    }
-	System.out.println("Kind: "+ skind + "MaintenanceName:" + maintenanceName + "  MaintenanceYear:" 
-	+ maintenanceYear + "  Distancedriven:" + distancedriven + "  Workshop:" + workshop);
-	}	
-	public void getUserInput(Scanner input) {
+	public abstract void printInfo();
+	
+	public void setMaintenanceName(Scanner input) {
 		System.out.print("Maintenance Name:");
-		String maintenanceName = input.next();
-		this.setMaintenanceName(maintenanceName);
-		
+		String maintenanceName1 = input.next();
+		this.setMaintenanceName(maintenanceName1);			
+	}
+	public void setMaintenanceYear(Scanner input) {
 		System.out.print("Maintenance Year:");
 		int maintenanceYear = input.nextInt();
-		this.setMaintenanceYear(maintenanceYear);
-		
+		this.setMaintenanceYear(maintenanceYear);			
+	}
+	public void setDistancedriven(Scanner input) {
 		System.out.print("Distance driven:");
 		int distancedriven  = input.nextInt();
 		this.setDistancedriven(distancedriven);
-		
+	}
+	public void setWorkshop(Scanner input) {
 		System.out.print("Workshop:");
 		String workshop  = input.next();
-		this.setWorkshop(workshop);	
-	}	
-  }
+		this.setWorkshop(workshop);
+	}
+	public String getkind() {
+		String skind = "none";
+	    switch(this.kind) {
+	    case Enginepart:
+	    	skind = "Engine";
+	    	break;
+	    case Tirepart:
+	    	skind = "Tire";
+	    	break;
+	    case Breakpart:
+	    	skind = "Break";
+	    	break;
+	    case Othermaintenancepart:
+	    	skind = "Other";
+	    	break;
+	    	default:		
+	    }
+	    return skind;
+	}
+}	  
+
 
