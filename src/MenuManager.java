@@ -1,13 +1,17 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuManager {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		MaintenanceManager maintenanceManager = new MaintenanceManager(input);
+		selectMenu(input, maintenanceManager);
 		
-		int num = -1;
-		
+  }
+ public static void selectMenu(Scanner input, MaintenanceManager maintenanceManager) {
+	 int num = -1;	
 		while(num !=5) {
+			try {
         showMenu();      
 		num = input.nextInt();
 		switch(num) {
@@ -22,9 +26,16 @@ public class MenuManager {
 		default:
 			continue;
 		}
-	}
-  }
-
+	  }
+			catch(InputMismatchException e) {
+				System.out.println("Please put an integer between 1 and 5!");
+				if(input.hasNext()) {
+				input.next();	
+				}
+				num = -1;
+		}
+	} 
+ }	
  public static void showMenu() {
 	 System.out.println("+++ Subokcar Maintenance Management System +++");
 		System.out.println(" 1. Add Maintenance");

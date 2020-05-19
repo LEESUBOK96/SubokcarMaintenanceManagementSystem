@@ -2,6 +2,8 @@ package Maintenance;
 
 import java.util.Scanner;
 
+import exception.WorkshopFormatException;
+
 public abstract class PreviousMaintenance extends Maintenance {
 	
 	public PreviousMaintenance(MaintenanceKind kind) {
@@ -22,17 +24,21 @@ public abstract class PreviousMaintenance extends Maintenance {
 		while (answer != 'y' && answer != 'Y'&& answer != 'n' && answer != 'N') {
 		System.out.print("Do you have an workshop data? (Y/N)");
 		answer = input.next().charAt(0);
-		if (answer == 'y' || answer == 'Y') {
-		setWorkshop(input);
-		break;
-	}
-		else if(answer == 'n' || answer == 'N') {
-			this.setWorkshop("");
+		try {
+			if (answer == 'y' || answer == 'Y') {
+			setWorkshop(input);
 			break;
 		}
-		else {
-			
+			else if(answer == 'n' || answer == 'N') {
+				this.setWorkshop("");
+				break;
+			}
+			else {
+			}
+		}
+			catch(WorkshopFormatException e) {
+				System.out.println("Incorrect Workshop Format. put the Workshop that contains '-' ");	
+			}
 		}
 	}	
   }
-}

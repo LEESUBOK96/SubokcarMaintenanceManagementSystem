@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Maintenance.BreakpartMaintenance;
@@ -21,6 +22,7 @@ public class MaintenanceManager {
 		int kind = 0;
 		MaintenanceInput maintenanceInput;
 		while(kind !=1 && kind !=2 && kind !=3 && kind !=4) {
+		try {
 		System.out.println("1 for Enginepart");
 		System.out.println("2 for Tirepart");
 		System.out.println("3 for Breakpart");
@@ -54,7 +56,15 @@ public class MaintenanceManager {
         else {
         	System.out.print("Select num for Maintenance Kind between 1-4 :");
             }
-		}	
+		 }
+		catch(InputMismatchException e) {
+			System.out.println("Please put an integer between 1 and 4!");
+			if(input.hasNext()) {
+			input.next();	
+			}
+			kind = -1;
+		 }
+	   }	
     }
 		public void deleteMaintenance() {
 			

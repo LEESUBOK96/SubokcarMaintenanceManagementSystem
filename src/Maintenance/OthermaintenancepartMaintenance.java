@@ -2,6 +2,8 @@ package Maintenance;
 
 import java.util.Scanner;
 
+import exception.WorkshopFormatException;
+
 public class OthermaintenancepartMaintenance extends PreviousMaintenance {
 	
 	public OthermaintenancepartMaintenance(MaintenanceKind kind) {
@@ -24,18 +26,23 @@ public class OthermaintenancepartMaintenance extends PreviousMaintenance {
 		while (answer != 'y' && answer != 'Y'&& answer != 'n' && answer != 'N') {
 		System.out.print("Do you have a previous workshop data? (Y/N)");
 		answer = input.next().charAt(0);
-		if (answer == 'y' || answer == 'Y') {
-		System.out.print("previous Workshop:");
-		String workshop  = input.next();
-		this.setWorkshop(workshop);
-		break;
-	}
-		else if(answer == 'n' || answer == 'N') {
-			this.setWorkshop("");
+		try {
+			if (answer == 'y' || answer == 'Y') {
+			System.out.print("previous Workshop:");
+			String workshop  = input.next();
+			this.setWorkshop(workshop);
 			break;
 		}
-		else {
-			
+			else if(answer == 'n' || answer == 'N') {
+				this.setWorkshop("");
+				break;
+			}
+			else {
+				
+			}
+		}
+		catch(WorkshopFormatException e) {
+			System.out.println("Incorrect Workshop Format. put the Workshop that contains '-' ");	
 		}
 	}
 }
@@ -44,5 +51,4 @@ public class OthermaintenancepartMaintenance extends PreviousMaintenance {
 	System.out.println("Kind: "+ skind + "MaintenanceName:" + maintenanceName + "  MaintenanceYear:" 
 	+ maintenanceYear + "  Distancedriven:" + distancedriven + "  Workshop:" + workshop + " previous Distancedriven:" + distancedriven + "  previous workshop:" + workshop);
 	}
-	
 }

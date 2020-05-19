@@ -2,6 +2,8 @@ package Maintenance;
 
 import java.util.Scanner;
 
+import exception.WorkshopFormatException;
+
 public abstract class Maintenance implements MaintenanceInput {
 	protected MaintenanceKind kind = MaintenanceKind.Othermaintenancepart;
 	protected String maintenanceName;
@@ -79,7 +81,11 @@ public abstract class Maintenance implements MaintenanceInput {
 		return workshop;
 	}
 
-	public void setWorkshop(String workshop) {
+	public void setWorkshop(String workshop) throws WorkshopFormatException {
+		if(!workshop.contains("-") && !workshop.equals("")) {
+			throw new WorkshopFormatException();
+		}
+		
 		this.workshop = workshop;
 	}
 	
@@ -101,10 +107,18 @@ public abstract class Maintenance implements MaintenanceInput {
 		this.setDistancedriven(distancedriven);
 	}
 	public void setWorkshop(Scanner input) {
+		String workshop = "";
+		while(!workshop.contains("-")) {
 		System.out.print("Workshop:");
-		String workshop  = input.next();
-		this.setWorkshop(workshop);
+		workshop  = input.next();
+		try {
+			this.setWorkshop(workshop);
+		} catch (WorkshopFormatException e) {
+			System.out.println("Incorrect Workshop Format. put the Workshop that contains '-' ");
+		}
 	}
+}
+	
 	public String getkind() {
 		String skind = "none";
 	    switch(this.kind) {
@@ -125,5 +139,3 @@ public abstract class Maintenance implements MaintenanceInput {
 	    return skind;
 	}
 }	  
-
-
