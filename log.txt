@@ -1,0 +1,2 @@
+5월 26, 2020 11:48:44 오전 log.EventLogger log
+정보: view a list of maintenance
