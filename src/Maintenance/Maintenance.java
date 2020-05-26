@@ -1,10 +1,16 @@
 package Maintenance;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import exception.WorkshopFormatException;
 
-public abstract class Maintenance implements MaintenanceInput {
+public abstract class Maintenance implements MaintenanceInput, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5976979862977798433L;
+	
 	protected MaintenanceKind kind = MaintenanceKind.Othermaintenancepart;
 	protected String maintenanceName;
 	protected int maintenanceYear;

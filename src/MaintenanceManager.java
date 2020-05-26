@@ -1,18 +1,23 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Maintenance.BreakpartMaintenance;
 import Maintenance.EnginepartMaintenance;
-import Maintenance.Maintenance;
 import Maintenance.MaintenanceInput;
 import Maintenance.MaintenanceKind;
 import Maintenance.OthermaintenancepartMaintenance;
 import Maintenance.TirepartMaintenance;
 
-public class MaintenanceManager {
+public class MaintenanceManager implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 363410351465116253L;
+	
 	ArrayList<MaintenanceInput> maintenances = new ArrayList<MaintenanceInput>();
-	Scanner input;
+	transient Scanner input;
 	
 	MaintenanceManager(Scanner input){
 		this.input = input;
@@ -139,5 +144,7 @@ public class MaintenanceManager {
 			System.out.println(" 5. Exit");
 			System.out.print(" Select one number between 1-5 :");		
 		}
-		
+		public void setScanner(Scanner input) {
+	        this.input = input;
+	    }
 }
