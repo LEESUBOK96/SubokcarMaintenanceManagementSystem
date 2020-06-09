@@ -1,13 +1,18 @@
 package gui;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class MaintenanceViewer extends JFrame{
+public class MaintenanceViewer extends JPanel {
+	
+	WindowFrame frame;
 
-	public MaintenanceViewer() {
+	public MaintenanceViewer(WindowFrame frame) {
+		this.frame = frame;
+		
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Maintenance Name");
 		model.addColumn("Maintenance Year");
@@ -19,9 +24,5 @@ public class MaintenanceViewer extends JFrame{
 		JScrollPane sp = new JScrollPane(table);
 		
 		this.add(sp);
-		this.setSize(300, 300);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		this.setVisible(true);
 	}
 }
