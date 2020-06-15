@@ -1,3 +1,4 @@
+package manager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -5,6 +6,7 @@ import java.util.Scanner;
 
 import Maintenance.BreakpartMaintenance;
 import Maintenance.EnginepartMaintenance;
+import Maintenance.Maintenance;
 import Maintenance.MaintenanceInput;
 import Maintenance.MaintenanceKind;
 import Maintenance.OthermaintenancepartMaintenance;
@@ -134,6 +136,13 @@ public class MaintenanceManager implements Serializable {
 			}			
 		}
 
+		public int size() {
+			return maintenances.size();
+		}
+		
+		public MaintenanceInput get(int index) {
+			return (Maintenance) maintenances.get(index);
+		}
 		
 		public void showEditMenu() {
 			System.out.println("++ Subokcar Maintenance Info Edit Menu ++");

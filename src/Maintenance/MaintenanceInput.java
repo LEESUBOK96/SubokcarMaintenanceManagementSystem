@@ -8,8 +8,11 @@ public interface MaintenanceInput {
 	
 	public String getMaintenanceName();
 	public void setMaintenanceName(String maintenanceName);
+	public int getMaintenanceYear();
 	public void setMaintenanceYear(int maintenanceYear);
+	public int getDistancedriven();
 	public void setDistancedriven(int distancedriven);
+	public String getWorkshop();
 	public void setWorkshop(String workshop) throws WorkshopFormatException;
 	public void getUserInput(Scanner input);
 	public void printInfo();

@@ -3,19 +3,27 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import manager.MaintenanceManager;
+
 public class WindowFrame extends JFrame {
 	
+	MaintenanceManager maintenanceManager;
 	MenuSelection menuselection;
 	MaintenanceAdder maintenanceadder;
 	MaintenanceViewer maintenanceviewer;
 	
-	public WindowFrame() {
-		this.menuselection = new MenuSelection(this);
-		this.maintenanceadder = new MaintenanceAdder(this);
-		this.maintenanceviewer = new MaintenanceViewer(this);
-		
+	
+	public WindowFrame(MaintenanceManager maintenanceManager) {
 		this.setSize(500, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("My Frame");
+		
+		this.maintenanceManager = maintenanceManager;
+		this.menuselection = new MenuSelection(this);
+		this.maintenanceadder = new MaintenanceAdder(this);
+		this.maintenanceviewer = new MaintenanceViewer(this, this.maintenanceManager);
+		
+		
 		
 		this.setupPanel(menuselection);
 		
